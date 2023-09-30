@@ -94,3 +94,85 @@ var splitInParts = function(s, partLength){
   }
 
   solution(10);
+
+  function charCheck(text, max, spaces){
+    let result = [];
+      if(spaces === true){
+      const arr = text.split('');
+      if(arr.length<=max){
+        result[result.length] = true;
+        result[result.length] = arr.join('');  
+        return result;
+    } else if (arr.length>max){
+        let partialResult = []
+        result[result.length] = false;
+        for (let i = 0; i < max; i++) {
+            partialResult[partialResult.length] = arr[i];
+        }
+        result[result.length] = partialResult.join('');
+        return result
+    } 
+
+  } else if (spaces === false){
+        let arr = '';
+       
+        for (let i = 0; i < text.length; i++) {
+            if(text[i] !==' '){
+                arr += text[i];
+            } 
+        }
+        
+       
+        if(arr.length <=max){ 
+        result[result.length] = true;
+        result[result.length] = arr;
+        return result
+        } else if(arr.length > max){
+        let partialResult = '';
+        for (let i = 0; i < max; i++) {
+            if(arr[i] !== ' '){
+                partialResult +=arr[i];
+            }
+            
+        }
+        result[result.length]=false;
+        result[result.length]=partialResult;
+        return result;
+       }
+  }
+};
+
+charCheck("As Deputy Base Manager on Phobos for five Martian years, I have significant relevant experience.", 60, false);
+
+
+decodeMorse = function(morseCode){
+    const splt = morseCode.split(' ');
+    let result = [];
+   const morse = {
+        '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F',
+        '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L',
+        '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R',
+        '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X',
+        '-.--': 'Y', '--..': 'Z',
+        '-----': '0', '.----': '1', '..---': '2', '...--': '3', '....-': '4',
+        '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9',
+        '.-.-.-': '.', '--..--': ',', '..--..': '?', '.----.': "'", '-.-.--': '!',
+        '-..-.': '/', '-.--.': '(', '-.--.-': ')', '.-...': '&', '---...': ':',
+        '-.-.-.': ';', '-...-': '=', '.-.-.': '+', '-....-': '-', '..--.-': '_',
+        '.-..-.': '"', '...-..-': '$', '.--.-.': '@', '...---...': 'SOS'
+    }
+    // console.log(splt);
+    for (let i = 0; i < splt.length; i++) {
+        if(splt[i] !==''){
+            result[result.length] = morse[splt[i]];
+        } else if (splt[i] === '' && splt[i+1] === ''){
+            result[result.length]= ' '
+        }
+        
+        
+    }
+  
+    
+    return result.join('').trim()
+  }
+  console.log(decodeMorse('.... . -.--   .--- ..- -.. .'))
