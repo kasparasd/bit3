@@ -192,10 +192,24 @@ arrayDiff([5,5,4,3,2], [1,2]);
 
 const orderedCount = function (text) {
     let result = [];
+    let unique = [];
+    for (let i = 0; i < text.length; i++) {
+        if(!unique.includes(text[i])){
+            unique.push(text[i]);
+        } 
+    }
+    for (let i = 0; i < unique.length; i++) {
+        result.push([unique[i],0]);
+    }
     
     for (let i = 0; i < text.length; i++) {
-        if(result.includes(text[i])===false){
-            result.push([text[i], 1])
+        for (let j = 0; j < result.length; j++) {
+            if(result[j][0]===text[i]){
+                result[j][1] = result[j][1]+1
+                // result.push([text[i]]);
+                // console.log(result[j][0]);
+            } 
+            
         }
         
     }
