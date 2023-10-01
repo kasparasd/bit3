@@ -175,4 +175,30 @@ decodeMorse = function(morseCode){
     
     return result.join('').trim()
   }
-  console.log(decodeMorse('.... . -.--   .--- ..- -.. .'))
+decodeMorse('.... . -.--   .--- ..- -.. .');
+
+function arrayDiff(a, b) {
+    let result = [];
+    for (let i = 0; i < a.length; i++) {
+        if(!b.includes(a[i])){
+            result[result.length] = a[i];
+        }
+    }
+    return result;
+}
+
+arrayDiff([5,5,4,3,2], [1,2]);
+ 
+
+const orderedCount = function (text) {
+    let result = [];
+    
+    for (let i = 0; i < text.length; i++) {
+        if(result.includes(text[i])===false){
+            result.push([text[i], 1])
+        }
+        
+    }
+    return result;
+  }
+  console.log(orderedCount('abracadabra'));
