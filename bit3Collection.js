@@ -567,51 +567,139 @@ function validBraces2(braces){
   
 // console.log(validBraces2("({}) [({})]"));
 
-function validBraces(str){
-    const closingBraces = {
-        ')':'(',
-        '}':'{',
-        ']':'['
-    }
+// function validBraces(str){
+//     if(str.length%2 !== 0){
+//         return false
+//     }
+//     const closingBraces = {
+//         ')':'(',
+//         '}':'{',
+//         ']':'['
+//     }
 
-    let currentArr = [];
+//     let currentStr = '';
+//     let interation = 2;
+//     for (let i = 0; i < str.length; i++) {
+ 
+//         currentStr +=str[i];
+
+//         if(closingBraces[str[i]] && currentStr[currentStr.length-interation]===closingBraces[currentStr[i]]){
+//             console.log(currentStr, i);               
+//             currentStr = currentStr.slice(0,-2)
+//             interation +=2;
+//         } 
+//     }
+//     // currentStr = '([]' 
+//     // console.log(currentStr[2], currentStr[currentStr.length-2]);
+//     console.log(currentStr, 'str');
+//     return currentStr.length >0 ? false:true;
+// }
+
+
+function validBraces(str){
+
+    const closingBraces = {
+                ')':'(',
+                '}':'{',
+                ']':'['
+            }
+
+    let bracesOpening = [];
+    let bracesOpeningLength = [];
+    let bracesClosingLength = [];
 
     for (let i = 0; i < str.length; i++) {
-        currentArr.push(str[i])
+        if(str[i]==='(' || str[i]==='{' || str[i]==='['){
+            bracesOpeningLength.push(str[i]);
+            bracesOpening.push(str[i]);
+        }
+        if(str[i]===')' || str[i]==='}' || str[i]===']' ){
+            bracesClosingLength.push(str[i]);
+           if(closingBraces[str[i]]===bracesOpening.at(-1)) {
+               bracesOpening.pop()
+           }
+        }
+    }
+    console.log(bracesClosingLength.length, bracesOpeningLength.length);
+    return bracesOpening.length>0 || bracesClosingLength.length !== bracesOpeningLength.length? false:true;
+}
 
-        if(closingBraces[currentArr[i]]){
-            if(currentArr[i-1]===closingBraces[currentArr[i]]){
-               currentArr.slice(0,-2)
-                console.log(currentArr, i);
-            } 
+
+// console.log(validBraces("()))"))
+
+
+var uniqueInOrder=function(iterable){
+
+    let result =[];
+
+    for (let i = 0; i < iterable.length; i++) {
+        if(result.at(-1)===iterable[i]){
+            continue
+        } else result.push(iterable[i]);
+    }
+    return result;
+}
+  
+// console.log(uniqueInOrder('AAAABBBCCDAABBB')) //['A','B','C','D','A','B'];
+
+ function searchArray (arrayToSearch, query) {
+    for(let i = 0; i < arrayToSearch.length; i++){
+        if(!Array.isArray(arrayToSearch) || !Array.isArray(query) || query.length !== 2 || arrayToSearch[i].length !==2){
+            throw new Error ("");
+        }
+    }
+
+    for (let i = 0; i < arrayToSearch.length; i++) {
+        if(arrayToSearch[i][0] === query[0] && arrayToSearch[i][1]===query[1]) {
+            return i;
         } 
         
     }
-    // console.log(currentArr[1], closingBraces[currentArr[2]]);
-    // console.log(closingBraces[currentArr[2]]);
+    return -1;
+    
+    }
 
-    console.log(currentArr);
-    // console.log(currentArr.slice(0,-2));
+// console.log(searchArray([[1,1],[7,2],[1,12],[1,2],[7,2],[45,4],[7,87],[4,5],[2,7],[6,32]], [1,12]))
+
+
+// Mentoriaus uzduotys
+// 1/2
+
+function markHigherBMI (markoSvoris, markoUgis, jonoSvoris, jonoUgis){
+const markoKmi = (markoSvoris/markoUgis**2).toFixed(2);
+const jonoKmi = (jonoSvoris/jonoUgis**2).toFixed(2);
+
+return markoKmi>jonoKmi ? `Marko KMI ${markoKmi} yra didesnis nei Jono ${jonoKmi}` : `Jono KMI ${jonoKmi} yra didesnis nei Marko ${markoKmi}`;
 }
-console.log(validBraces("(({})[({})])"))
+
+// console.log(markHigherBMI(95, 1.88, 85, 1.76))
+
+// 3
 
 
+function varzybos(delfinai, koalos){
+    let delfinaiTaskai = 0;
+    let koalosTaskai = 0;
 
+    for (let i = 0; i < delfinai.length; i++) {
+        delfinaiTaskai += delfinai[i];
+        koalosTaskai += koalos[i];
+        
+    }
+   
+    if(delfinaiTaskai/delfinai.length < 100 && koalosTaskai/koalos.length < 100) {
+        return `Nugaletojo nera, nei viena komanda nesurinko 100 tasku. Delfinai: ${Math.round(delfinaiTaskai/delfinai.length)}, koalos: ${Math.round(koalosTaskai/koalos.length)}`;
+    }
+    if(delfinaiTaskai/delfinai.length > koalosTaskai/koalos.length){
+        return `Delfinai yra nugaletojai su ${Math.round(delfinaiTaskai/delfinai.length)} taskais`;
+    } else if (delfinaiTaskai/delfinai.length < koalosTaskai/koalos.length) {
+        return `Koalos yra nugaletojai su ${Math.round(koalosTaskai/delfinai.length)} taskais`;
+    } else if (delfinaiTaskai===koalosTaskai){
+        return `Lygiosios, abi komandos surinko po ${Math.round(delfinaiTaskai/delfinai.length)} taskus`;
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+console.log(varzybos([97, 112, 101], [109, 95, 106]));
 
 
 
