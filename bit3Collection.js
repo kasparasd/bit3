@@ -699,43 +699,138 @@ function varzybos(delfinai, koalos){
     }
 }
 
-console.log(varzybos([97, 112, 101], [109, 95, 106]));
+// console.log(varzybos([97, 112, 101], [109, 95, 106]));
+
+
+
+function createPhoneNumber(numbers){
+    const first = numbers.slice(0,3).join('');
+    const second = numbers.slice(3,6).join('');
+    const third = numbers.slice(6,11).join('');
+    return `(${first}) ${second}-${third}`
+  }
+//   console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])) 
+  // "(123) 456-7890"
+
+  function likes(names) {
+    if (names.length === 0){
+        return 'no one likes this';
+    } else if (names.length === 1){
+        return `${names[0]} likes this`
+    } else if (names.length===2){
+        return `${names[0]} and ${names[1]} like this`
+    } else if (names.length===3){
+        return `${names[0]}, ${names[1]} and ${names[2]} like this`
+    }  else if (names.length>3){
+        return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`
+    }
+  }
 
 
 
 
+//   console.log(likes(['Alex', 'Jacob', 'Mark', 'Max']));
+  // 'Alex, Jacob and 2 others like this');
+
+  function findOutlier(integers){
+    let odd = [];
+    let even = [];
+
+    for (let i = 0; i < integers.length; i++) {
+        if(integers[i]%2 === 0){
+            even.push(integers[i]);
+        } else odd.push(integers[i]);
+        
+    }
+    return odd.length > even.length ? even[0] : odd[0];
+  }
 
 
+// console.log(findOutlier([0, 1, 2])); //1
+
+function comp(array1, array2){
+
+    if(array1 === null || array2 === null){
+        return false;
+    } else if (array1.length === 0 || array2.length === 0){
+        return true;
+    }
+        let = array1Sqr = [];
+        let result = true;
+
+        
+        for (let i = 0; i < array1.length; i++) {
+            array1Sqr.push(array1[i]**2)
+        }
+
+        array1Sqr.sort();
+        array2.sort();
+        console.log(array1Sqr, array1);
+
+        for (let i = 0; i < array1Sqr.length; i++) {
+            if(array1Sqr[i]!==array2[i]){
+               result = false;
+            }
+        }
+        return result;
+  }
+
+//   console.log(comp(null, null));
 
 
+function isPrime(num) {
+    if(num<0){
+        return false;
+    }
+    for (let i = 2; i < num+3; i++) {
+       
+        if(num === 1 || num === 0){
+            return false;
+        } else if (num===i) return true;
+        else if( (num/i)%1 === 0){
+            console.log(num, i);
+            return false;
+        }
+    }
+  }
+
+  console.log(isPrime(73));
 
 
+  function alphabetPosition(text) {
+    textToLower = text.toLowerCase();
+    
+    const abc={
+        a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8, i: 9, j: 10, k: 11, 
+        l: 12, m: 13, n: 14,o: 15, p: 16, q: 17, r: 18, s: 19, t: 20, 
+        u: 21, v: 22, w: 23, x: 24, y: 25, z: 26
+    }
+
+    let result = [];
+
+    for (let i = 0; i < textToLower.length; i++) {
+        // console.log(abc[textToLower[i]] === undefined);
+        if(abc[textToLower[i]]!== undefined){
+            result.push(abc[textToLower[i]])        
+        }
+    }
+    return result.join(' ')
+  }
+// console.log(alphabetPosition("The sunset sets at twelve o' clock."));
 
 
+function findOdd(a) {
+
+    for (let i = 0; i < a.length; i++) {
+        if(a.filter(el=>el===a[i]).length%2 !== 0){
+            return a[i];
+        }
+        
+    }
+    return 0;
+  }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  console.log(findOdd([1,2,2,3,3,3,4,3,3,3,2,2,1])) //4
 
 
