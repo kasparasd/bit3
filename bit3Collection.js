@@ -703,6 +703,7 @@ function varzybos(delfinai, koalos){
 
 
 
+
 function createPhoneNumber(numbers){
     const first = numbers.slice(0,3).join('');
     const second = numbers.slice(3,6).join('');
@@ -725,8 +726,7 @@ function createPhoneNumber(numbers){
         return `${names[0]}, ${names[1]} and ${names.length - 2} others like this`
     }
   }
-
-
+  
 
 
 //   console.log(likes(['Alex', 'Jacob', 'Mark', 'Max']));
@@ -794,7 +794,7 @@ function isPrime(num) {
     }
   }
 
-  console.log(isPrime(73));
+//   console.log(isPrime(73));
 
 
   function alphabetPosition(text) {
@@ -831,6 +831,445 @@ function findOdd(a) {
   }
 
 
-  console.log(findOdd([1,2,2,3,3,3,4,3,3,3,2,2,1])) //4
+//   console.log(findOdd([1,2,2,3,3,3,4,3,3,3,2,2,1])) //4
+
+
+function pigIt(str){
+    const punctuations = [".", ",", ":", "!", "?"]
+    const strSplit = str.split(' ');
+    let result = [];
+
+    for (let i = 0; i < strSplit.length; i++) {
+        if(!punctuations.includes(strSplit[i])){
+            result.push(strSplit[i].slice(1,strSplit[i].length+1)+strSplit[i][0]+'ay');
+        } else if (punctuations.includes(strSplit[i])){
+            result.push(strSplit[i])
+        }
+    }
+    return result.join(' ');
+  }
+
+//   console.log(pigIt('This is my string'))
+
+function moveZeros(arr) {
+    const notZero = arr.filter(el=>el!==0);
+    let result = notZero;
+    
+    for (let i = 0; i<arr.length-notZero.length+i; i++) {
+            result.push(0);
+    }
+
+    return result;
+    
+  }
+
+  moveZeros([1,2,0,1,0,1,0,3,0,1,0])
+
+  function isPangram(string){
+    let abc = 'abcdefghijklmnopqrstuvwxyz';
+    string = string.toLowerCase();
+
+    for (let i = 0; i < string.length; i++) {
+        if(abc.includes(string[i])){
+            abc = abc.replace(string[i], '')
+        }
+        
+    }
+
+    return abc.length > 0 ? false:true;
+  }
+
+// console.log(isPangram('Pack my box with five dozen liquor jugs.'));
+
+function averageString(str) {
+    if(str.length===0){
+        return 'n/a';
+    }
+    const numbers = {
+        'zero':0,
+        'one':1,
+        'two':2,
+        'three':3,
+        'four':4,
+        'five':5,
+        'six':6,
+        'seven':7,
+        'eight':8,
+        'nine':9
+    }
+
+    const arr = str.split(' ');
+    
+    let sum = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        sum += numbers[arr[i]]
+        
+    }
+        if( sum === undefined){
+            return 'n/a';
+        }
+    return Object.keys(numbers).find(key=>numbers[key] === Math.floor(sum/arr.length)) ? Object.keys(numbers).find(key=>numbers[key] === Math.floor(sum/arr.length)): 'n/a';
+  }
+
+//   console.log(averageString("four six two three")) // "four"
+
+
+
+
+const camelCase = function(str){
+    const arr = str.toLowerCase().split(' ')
+    let result = [];
+    
+    for (let i = 0; i < arr.length; i++) {
+        result.push(arr[i][0].toUpperCase()+arr[i].slice(1))
+        
+    }
+    return result.join('');
+  }
+  camelCase("teSt case")
+
+  String.prototype.camelCase=function(){
+    const arr = this.toLowerCase().split(' ')
+      let result = [];
+      
+      for (let i = 0; i < arr.length; i++) {
+          result.push(arr[i][0].toUpperCase()+arr[i].slice(1))
+          
+      }
+      return result.join('');
+  }
+
+//   'abc bbc'.camelCase()
+
+
+function high(x){
+    const abc = 'abcdefghijklmnopqrstuvwxyz';
+    const arr = x.split(' ')
+
+    let points = 0;
+    let pointsMax = 0;
+    let word = '';
+    
+    for (let i = 0; i < arr.length; i++) {
+        points = 0;
+        for (let j = 0; j < arr[i].length; j++) {
+            points += abc.indexOf(arr[i][j])+1;
+        }
+        if(pointsMax<points) {
+            pointsMax = points;
+            word = arr[i]
+        }
+    }
+    return word;
+}
+
+// console.log(high('man i need a taxi up to ubud'));
+
+
+
+
+
+  var countBits = function(n) {
+    const bits = n.toString(2).split('')
+    return bits.filter(el=>el==='1').length;
+  };
+
+//   console.log(countBits(1234));
+
+
+var compose = function(...n) {
+    if(n.length === 1 && typeof n === 'string'){
+        return n.join('');
+    } else if(n.length === 1 && typeof n === 'number'){
+        return n;
+    }
+    let result =n[0];
+    
+    for (let i = 1; i < n.length; i++) {
+        result = n[i](result)
+        // console.log(result);
+    }
+    // console.log(result);
+    return result;
+    
+  }
+
+  
+  const doubleTheValue = function(n){
+    return n*2;
+  }
+
+  const addOneToTheValue = function(n){
+    return n+1;
+  }
+  const valueLength = function(n){
+    return n.length;
+  }
+  
+//   compose("Hello, world", valueLength, doubleTheValue, addOneToTheValue)
+compose(1)
+
+function toUnderscore(string) {
+    let newStr = '';
+    // console.log(newStr);
+
+    for (let i = 0; i < string.length; i++) {
+        if(string[i].toUpperCase()===string[i] && i!==0 && isNaN(parseInt(string[i]))){
+            console.log(i);
+            newStr = newStr + `_${string[i].toLowerCase()}`;
+        } else newStr += string[i].toLowerCase();
+        
+    }
+    return newStr;
+  }
+
+//   console.log(toUnderscore('abc1Cba'));
+
+function findMissingLetter(array){
+
+    const abc = 'abcdefghijklmnopqrstuvwxyz';
+    let result = [];
+    let final = '';
+    let upper = 'false';
+
+    if(array[0] === array[0].toUpperCase()){
+        array = array.join('').toLowerCase().split('');
+        upper = true;
+    }
+    console.log(array);
+    for (let i = 0; i < array.length; i++) {
+        result.push(abc.indexOf(array[i]));
+        if(abc.indexOf(array[i])-abc.indexOf(array[i-1]) === 2){
+            final = abc[abc.indexOf(array[i])-1];
+        } 
+    };
+
+    console.log(array);
+
+  return upper === true ? final.toUpperCase(): final;;
+}
+// console.log(findMissingLetter(['a','b','c','d','f'])) // 'e'
+
+
+function generateHashtag (str) {
+    
+    let trim = str.trim();
+
+    // while (trim.includes("  ")) {
+    //     trim = trim.replace("  ", " ")
+    // }
+
+
+    if(trim.length === 0){
+        return false;
+    }
+   const arr =  trim.split(' ')
+
+    let result = ['#'];
+    for (let i = 0; i < arr.length; i++) {
+        if(arr[i] !== ""){
+
+            result.push(arr[i][0].toUpperCase()+arr[i].slice(1).toLowerCase())
+        }
+    }
+
+    return result.join('').length < 141 ? result.join('') : false;
+}
+
+
+// console.log(generateHashtag("aaaaaaaaaaaaaaaaaaaaaaa   aaaaaaaaaaa"));
+
+function replaceAll(input, find, replace) {
+    input = input.replaceAll(find, replace)
+    return input;
+
+}
+
+//   console.log(replaceAll("string-string", "ing", "!"))
+
+
+function reverse2(str){
+    const arr = str.split(' ');
+    let tarpinis = [];
+    let second = 0;
+    let result = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        second++
+        if(second%2 === 0 && arr[i]!=="" ){
+            tarpinis = [];
+            for (let j = arr[i].length; j>0; j--) {
+                
+                tarpinis.push(arr[i][j-1])
+                
+            }
+            result.push(tarpinis.join(''));
+        } else if (arr[i] !== ""){
+            result.push(arr[i]);
+        }
+    }
+    
+    return result.join(" ");
+  }
+
+//   console.log(reverse2("   "));
+
+
+
+
+function rot13(str) {
+    const abc = 'abcdefghijklmnopqrstuvwxyz';
+    console.log(abc[0].toUpperCase() === abc[0]);
+    
+    let result  = '';
+
+    for (let i = 0; i < str.length; i++) {
+        if(str[i] !== ' ' && abc.includes(str[i].toLowerCase())) {
+            const abcPosition = abc.indexOf(str[i].toLowerCase())+13
+            if(abcPosition>=abc.length){
+                const diff = abcPosition-abc.length;
+                if(str[i].toLowerCase()===str[i]){
+                    result += abc[diff]
+                } else {
+                    console.log(abc[i]);
+                    result += abc[diff].toUpperCase()
+                };
+            } else {
+                if(str[i].toUpperCase() === str[i]){
+                    result +=abc[abcPosition].toUpperCase()
+                } else result += abc[abcPosition]
+            }
+            
+        }
+        else result += str[i];
+        
+    }
+    return result;
+}
+
+// console.log(rot13('EBG13 rknzcyr.'));
+
+
+
+// Evenas nori sukurti labai paprastą arbatpinigių skaičiuotuvą, kai jis eina valgyti į 
+// restoraną. Jo šalyje įprasta duoti 15 % arbatpinigių, jei sąskaitos vertė yra nuo 50 iki 300. 
+// Jei vertė skiriasi, arbatpinigiai yra 20%.
+// Jūsų užduotys:
+// Apskaičiuokite arbatpinigių, priklausomai nuo sąskaitos vertės. Sukurkite kintamąjį pavadinimu „Tip“.
+// Neleidžiama naudoti if/else teiginio  (Jei jums taip lengviau, galite
+// pradėti nuo if/else teiginio, tada pabandykite jį konvertuoti į ternery operator!)
+// Į konsole atspausdinkite eilutę, kurioje yra sąskaitos vertė, arbatpinigiai ir galutinė vertė
+// (sąskaita + arbatpinigiai). Pavyzdys: „Sąskaita buvo 275, arbatpinigiai 41,25, o bendra vertė 316,25"
+
+// Bandymo duomenys:
+// § 1 duomenys: patikrinkite sąskaitos reikšmes 275, 40 ir 430
+
+const tips = function(amount){
+    let tip = 0;
+    amount >= 50 && amount <= 300 ? tip = amount*0.15 : tip = amount*0.2;
+    
+    console.log(`Saskaita buvo ${amount}, arbatpinigiai ${tip}, bendra suma ${amount+tip}`);
+}
+
+// tips(40)
+
+// 1
+const vardas1 = 'jonas jonaitis';
+const vardas2 = 'jonas petraitis';
+
+vardas1.length>vardas2.length ? console.log('1 uzduotis:',vardas1) : console.log('1 uzduotis:',vardas2);
+
+// 2
+const vardas = 'Jonas';
+const pavarde = 'Jonaitis';
+const gimimoMetai = 2000;
+const metai = 2023;
+
+console.log(`2 uzduotis: As esu ${vardas} ${pavarde} man yra ${metai-gimimoMetai} metai`);
+
+// 3
+// const vardas = 'Jonas';
+// const pavarde = 'Jonaitis';
+
+const vardasPavarde = vardas.at(-1) + vardas.at(-2) + vardas.at(-3) + ' ' + pavarde.at(-1)+pavarde.at(-2) + pavarde.at(-3)
+console.log('3 uzduotis:', vardasPavarde);
+
+
+// 4
+
+const hollywood =  'Once upon a time in hollywood';
+let newHollywood = '';
+
+console.log('4 uzduotis:',hollywood.replaceAll('o', '*').replaceAll('O', '*'));
+
+
+// 5
+
+function rand(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random()*(max-min+1)+min)
+}
+
+let arr = [];
+let obj = {};
+
+for (let i = 0; i < 4; i++) {
+    arr.push(rand(0,2));
+
+    if(obj[arr[i]]) {
+        obj[arr[i]] += 1; 
+    } else obj[arr[i]] = 1;
+}
+
+console.log(`5 uzduotis: Arejuj ${arr} yra ${JSON.stringify(obj)}`);
+
+
+// 6
+const pirmaReiksme = rand(0,4);
+const antraReiksme = rand(0,4);
+// console.log(pirmaReiksme, antraReiksme);
+
+console.log(`6 uzduotis: ${pirmaReiksme > antraReiksme ? (pirmaReiksme/antraReiksme).toFixed(2) : (antraReiksme/pirmaReiksme).toFixed(2)}`)
+
+// 7
+function vidurine (){
+    let arr = [];
+
+    for (let i = 0; i < 3; i++) {
+        arr.push(rand(0,25));
+    }
+    
+    console.log(`7 uzduotis: skaiciai: ${arr}, vidurine verte ${arr.sort((a,b)=>a-b)[1]}`)
+
+}
+
+vidurine()
+
+// 8
+
+const vardas8 = 'Jonas';
+const pavarde8 = 'Jonaitis';
+const vp = vardas8[0]+pavarde8[0];
+console.log(`8 uzduotis: ${vp}`);
+
+// 9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
