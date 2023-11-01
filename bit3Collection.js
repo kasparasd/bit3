@@ -1175,10 +1175,10 @@ const tips = function(amount){
 // tips(40)
 
 // 1
-const vardas1 = 'jonas jonaitis';
-const vardas2 = 'jonas petraitis';
+const vardas1 = 'jonas';
+const vardas2 = 'jonaitis';
 
-vardas1.length>vardas2.length ? console.log('1 uzduotis:',vardas1) : console.log('1 uzduotis:',vardas2);
+// vardas1.length<vardas2.length ? console.log('1 uzduotis:',vardas1) : console.log('1 uzduotis:',vardas2);
 
 // 2
 const vardas = 'Jonas';
@@ -1186,22 +1186,20 @@ const pavarde = 'Jonaitis';
 const gimimoMetai = 2000;
 const metai = 2023;
 
-console.log(`2 uzduotis: As esu ${vardas} ${pavarde} man yra ${metai-gimimoMetai} metai`);
+// console.log(`2 uzduotis: As esu ${vardas} ${pavarde} man yra ${metai-gimimoMetai} metai`);
 
 // 3
 // const vardas = 'Jonas';
 // const pavarde = 'Jonaitis';
 
-const vardasPavarde = vardas.at(-1) + vardas.at(-2) + vardas.at(-3) + ' ' + pavarde.at(-1)+pavarde.at(-2) + pavarde.at(-3)
-console.log('3 uzduotis:', vardasPavarde);
-
+// console.log(`3 uzduotis: ${vardas.slice(-3)+ ' '+ pavarde.slice(-3)}`);
 
 // 4
 
 const hollywood =  'Once upon a time in hollywood';
-let newHollywood = '';
 
-console.log('4 uzduotis:',hollywood.replaceAll('o', '*').replaceAll('O', '*'));
+
+// console.log('4 uzduotis:',hollywood.replaceAll('o', '*').replaceAll('O', '*'));
 
 
 // 5
@@ -1214,6 +1212,7 @@ function rand(min, max) {
 
 let arr = [];
 let obj = {};
+let result = '';
 
 for (let i = 0; i < 4; i++) {
     arr.push(rand(0,2));
@@ -1223,7 +1222,11 @@ for (let i = 0; i < 4; i++) {
     } else obj[arr[i]] = 1;
 }
 
-console.log(`5 uzduotis: Arejuj ${arr} yra ${JSON.stringify(obj)}`);
+for (var key in obj) { 
+    result += ` Arejuj turim ${key}, jis pasikartoja ${obj[key]} karta/us.`;
+  }
+// console.log(result);
+// console.log(`5 uzduotis: Arejuj ${arr} yra ${JSON.stringify(obj)}`);
 
 
 // 6
@@ -1231,7 +1234,7 @@ const pirmaReiksme = rand(0,4);
 const antraReiksme = rand(0,4);
 // console.log(pirmaReiksme, antraReiksme);
 
-console.log(`6 uzduotis: ${pirmaReiksme > antraReiksme ? (pirmaReiksme/antraReiksme).toFixed(2) : (antraReiksme/pirmaReiksme).toFixed(2)}`)
+// console.log(`6 uzduotis: ${pirmaReiksme > antraReiksme ? (pirmaReiksme/antraReiksme).toFixed(2) : (antraReiksme/pirmaReiksme).toFixed(2)}`)
 
 // 7
 function vidurine (){
@@ -1241,34 +1244,147 @@ function vidurine (){
         arr.push(rand(0,25));
     }
     
-    console.log(`7 uzduotis: skaiciai: ${arr}, vidurine verte ${arr.sort((a,b)=>a-b)[1]}`)
+    // console.log(`7 uzduotis: skaiciai: ${arr}, vidurine verte ${arr.sort((a,b)=>a-b)[1]}`)
 
 }
 
-vidurine()
+// vidurine()
 
 // 8
 
 const vardas8 = 'Jonas';
 const pavarde8 = 'Jonaitis';
 const vp = vardas8[0]+pavarde8[0];
-console.log(`8 uzduotis: ${vp}`);
+// console.log(`8 uzduotis: ${vp}`);
 
 // 9
 
 
 
+function randomAbc() {
+    const abc = 'abcdefghijklmnopqrstuvwxyz';
+    let str = '';
+ 
+    for (let i = 0; i < 3; i++) {
+        str += abc[rand(0,abc.length-1)]
+        
+    }
+    console.log(`9 uzduotis: ${str}`);
+}
+
+// randomAbc()
+
+//////////////////////////////////////////////////////////////////
+
+function scramble1(str1, str2) {
+    let result = true;
+
+
+    for (let i = 0; i < str2.length; i++) {
+        if(str1.includes(str2[i])){
+            str1 = str1.replace(str2[i], '');
+        } else return false;
+    }
+
+
+    return true;
+  }
+
+//   console.log(scramble1('wwwa','wwwwwa'));
+
+
+function scrambleSlow(str1, str2){
+    let str1Arr = str1.split('');
+    let str2Arr = str2.split('');
+    let obj1 = {};
+    let obj2 = {};
+      console.log(str1);
+    console.log(str2);
+
+    for (let i = 0; i < str1Arr.length; i++) {
+        if(obj1[str1Arr[i]]>0){
+            obj1[str1Arr[i]] +=1
+        } else obj1[str1Arr[i]] = 1;
+    }
+
+    for (let i = 0; i < str2Arr.length; i++) {
+        if(obj2[str2Arr[i]]>0){
+            obj2[str2Arr[i]] +=1
+        } else obj2[str2Arr[i]] = 1;
+    }
+
+    for (let i = 0; i < Object.keys(obj2).length; i++) {
+        console.log(obj2[Object.keys(obj2)[i]], obj1[Object.keys(obj2)[i]]);
+       if(obj2[Object.keys(obj2)[i]] > obj1[Object.keys(obj2)[i]] || obj1[Object.keys(obj2)[i]] === undefined) {
+        return false;
+       }
+        
+        
+    }
+
+    return true;
+}
+
+
+function scramble(str1, str2) {
+    let aObj = {};
+    let bObj = {};
+
+    for (let i = 0; i < str1.length; i++) {
+        const el = str1[i];
+        aObj[el] = aObj[el] + 1 || 1; 
+    }
+    for (let i = 0; i < str2.length; i++) {
+        const el = str2[i];
+        bObj[el] = bObj[el] + 1 || 1; 
+    }
+
+    for (let i = 0; i < Object.keys(bObj).length; i++) {
+        const element = Object.keys(bObj)[i];
+        if(aObj[element]>=bObj[element]){
+            continue;
+        } else return false
+        
+        
+    }
+    // console.log(aObj,'\n', bObj);
+    return true;
+  }
+
+// console.log(scramble('cedewaraaossoqqyt','codewarss'));
+
+function narcissistic(value) {
+    const arr = JSON.stringify(value).split('')
+    let sum = 0;
+    
+    for (let i = 0; i < arr.length; i++) {
+        sum = sum + Number(arr[i])**arr.length;
+        
+    }
+    return sum === value ? true:false;
+  }
 
 
 
+// console.log(narcissistic(153))
 
+function digitalRoot(n) {
+    while (n>=10) {
+        const str = n.toString()
+        let tarpine = 0;
+        for (let i = 0; i < str.length; i++) {
+            tarpine +=Number(str[i])
+            
+        }
+        n=tarpine;
+        
+    }
+    console.log(n);
+    return n
+    
+}
 
-
-
-
-
-
-
+digitalRoot(962497);
 
 
 
